@@ -1,0 +1,8 @@
+myenv/
+.env
+__pycache__/
+*.pyc
+vectorDatabase/
+*.faiss
+*.pkl
+.DS_Store
