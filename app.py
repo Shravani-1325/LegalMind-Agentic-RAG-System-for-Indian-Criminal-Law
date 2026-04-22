@@ -128,6 +128,8 @@ def render_sidebar():
             st.session_state.messages    = []
             st.session_state.last_result = None
             st.rerun()    # forcing immediate full rerun so chat clears instantly
+        
+        st.markdown("*Devloped by - Shravani More*")
             
 render_sidebar() 
 
@@ -383,12 +385,12 @@ if hasattr(st.session_state, "quick_lookup") and st.session_state.quick_lookup:
 # Fixed text box at bottom of page
 # st.chat_input returns typed text when user hits Enter
 # Returns None if user hasn't typed anything yet
-# Walrus operator := assigns AND checks in one line
-
-if user_input := st.chat_input("Ask about IPC, CrPC, or Evidence Act..."):
+user_input = st.chat_input("Ask about IPC, CrPC, or Evidence Act...")
+if user_input:
     process_query(user_input)
     st.rerun()    # force full rerun so sidebar stats update immediately      
-        
+ 
+       
         
 #>> Debug Panel 
 # Collapsible section showing raw pipeline data
