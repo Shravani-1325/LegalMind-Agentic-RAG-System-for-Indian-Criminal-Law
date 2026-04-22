@@ -2,7 +2,8 @@ myenv/
 .env
 __pycache__/
 *.pyc
+
 #vectorDatabase/
-*.faiss
-*.pkl
+#*.faiss
+#*.pkl
 .DS_Store
