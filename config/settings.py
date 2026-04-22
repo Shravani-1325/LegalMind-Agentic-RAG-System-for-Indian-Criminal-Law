@@ -3,10 +3,27 @@ from dotenv import load_dotenv
 import os
 
 #>> LLM Loading
+import os
+from dotenv import load_dotenv
+
+# Only import streamlit safely
+try:
+    import streamlit as st
+except:
+    st = None
+
+# Load local env
 load_dotenv()
 
 GROQ_MODEL = "llama-3.3-70b-versatile"
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+# Hybrid approach (works BOTH locally + cloud)
+if os.getenv("GROQ_API_KEY"):
+    GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+elif st is not None:
+    GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
+else:
+    GROQ_API_KEY = None
 
 #>> Base Directory 
 

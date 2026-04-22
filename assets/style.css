@@ -1,0 +1,497 @@
+/* ============================================================
+   LegalMind — Glassmorphism Legal Theme
+   
+   Color Palette (pulled from bg image — dark courtroom, gold light):
+   Deep Black    #0A0A0F   → page background overlay
+   Midnight Navy #0D1117   → base dark
+   Warm Gold     #C9A84C   → primary accent — courtroom lamp warmth
+   Pale Gold     #E8C97A   → hover / highlight
+   Glass White   rgba(255,255,255,0.07) → glass panels
+   Glass Border  rgba(255,255,255,0.12) → frosted borders
+   Muted Cream   #D4C5A9   → body text — aged parchment tone
+   Dim Grey      #6B7280   → secondary text
+   
+   Fonts:
+   Cormorant Garamond → headings — elegant, legal, serif
+   EB Garamond        → body text — classic legal document feel
+   ============================================================ */
+
+/* ── Google Fonts Import ──────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* ── CSS Variables ────────────────────────────────────────────── */
+:root {
+    --gold:          #C9A84C;
+    --gold-light:    #E8C97A;
+    --gold-dim:      #8B6914;
+    --glass-bg:      rgba(255, 255, 255, 0.06);
+    --glass-bg-hover:rgba(255, 255, 255, 0.10);
+    --glass-border:  rgba(255, 255, 255, 0.12);
+    --glass-border-gold: rgba(201, 168, 76, 0.35);
+    --dark-base:     #0A0A0F;
+    --dark-surface:  #0F1219;
+    --dark-card:     #131820;
+    --text-primary:  #D4C5A9;
+    --text-secondary:#8A8F9E;
+    --text-gold:     #C9A84C;
+    --blur:          blur(16px);
+    --blur-heavy:    blur(24px);
+    --shadow-gold:   0 0 30px rgba(201, 168, 76, 0.08);
+    --shadow-glass:  0 8px 32px rgba(0, 0, 0, 0.4);
+    --radius:        12px;
+    --radius-lg:     16px;
+}
+
+/* ── Background Image ─────────────────────────────────────────── */
+/* 
+   HOW TO USE YOUR BACKGROUND:
+   Streamlit renders inside .stApp — we set the bg image here.
+   The dark overlay ensures glass panels stay readable over the image.
+*/
+.stApp {
+    background-image: 
+        linear-gradient(
+            135deg,
+            rgba(10, 10, 15, 0.88) 0%,
+            rgba(13, 17, 23, 0.82) 50%,
+            rgba(10, 10, 15, 0.92) 100%
+        ),
+        url("https://images.unsplash.com/photo-1773433392027-2dff23126d86?q=80&w=2087&auto=format&fit=crop");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;   /* parallax effect — image stays as you scroll */
+    background-repeat: no-repeat;
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* ── Main Content Area ────────────────────────────────────────── */
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    max-width: 860px;
+}
+
+/* ── Headings ─────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+}
+
+h1 { font-size: 2.2rem; }
+h2 {
+    font-size: 1.7rem;
+    color: var(--gold);
+    border-bottom: 1px solid var(--glass-border-gold);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+h3 { font-size: 1.2rem; color: var(--gold-light); }
+
+/* ── Divider ──────────────────────────────────────────────────── */
+hr {
+    border: none;
+    border-top: 1px solid var(--glass-border);
+    margin: 1rem 0;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+/* 
+   Glassmorphism = frosted glass effect
+   backdrop-filter: blur() → blurs whatever is BEHIND the element
+   rgba background → semi-transparent so bg image shows through
+   border with low opacity → gives the "glass edge" look
+*/
+[data-testid="stSidebar"] {
+    background: rgba(10, 10, 15, 0.65) !important;
+    backdrop-filter: var(--blur-heavy) !important;
+    -webkit-backdrop-filter: var(--blur-heavy) !important;
+    border-right: 1px solid var(--glass-border) !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    background: transparent !important;
+}
+
+/* Sidebar all text */
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] li,
+[data-testid="stSidebar"] label {
+    font-family: 'EB Garamond', serif;
+    color: var(--text-primary) !important;
+    font-size: 1rem;
+}
+
+/* Sidebar headings */
+[data-testid="stSidebar"] h1 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold) !important;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 24px rgba(201, 168, 76, 0.4);
+    /* subtle gold glow on the LegalMind title */
+}
+
+[data-testid="stSidebar"] h3 {
+    color: var(--gold-light) !important;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* ── Sidebar Metric Boxes ─────────────────────────────────────── */
+[data-testid="stMetric"] {
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: var(--blur) !important;
+    border-radius: var(--radius) !important;
+    padding: 12px 10px !important;
+    transition: background 0.2s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    background: var(--glass-bg-hover) !important;
+    border-color: var(--glass-border-gold) !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-family: 'Cormorant Garamond', serif !important;
+    color: var(--gold) !important;
+    font-size: 1.6rem !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary) !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* ── Chat Messages ────────────────────────────────────────────── */
+/*
+   Each chat bubble gets glassmorphism treatment
+   User bubble → slightly blue-tinted glass
+   Assistant bubble → gold-left-border glass
+*/
+
+/* User message */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
+    background: rgba(30, 40, 70, 0.35) !important;
+    backdrop-filter: var(--blur) !important;
+    -webkit-backdrop-filter: var(--blur) !important;
+    border: 1px solid rgba(100, 130, 200, 0.15) !important;
+    border-radius: var(--radius-lg) !important;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-glass);
+    transition: all 0.2s ease;
+}
+
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]):hover {
+    border-color: rgba(100, 130, 200, 0.28) !important;
+    background: rgba(30, 40, 70, 0.45) !important;
+}
+
+/* Assistant message */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) {
+    background: rgba(201, 168, 76, 0.05) !important;
+    backdrop-filter: var(--blur) !important;
+    -webkit-backdrop-filter: var(--blur) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-left: 2px solid var(--gold) !important;
+    /* gold left border — signature LegalMind look */
+    border-radius: var(--radius-lg) !important;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-gold), var(--shadow-glass);
+    transition: all 0.2s ease;
+}
+
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]):hover {
+    background: rgba(201, 168, 76, 0.08) !important;
+    border-color: var(--glass-border-gold) !important;
+}
+
+/* Message text */
+.stChatMessage p {
+    font-family: 'EB Garamond', serif !important;
+    color: var(--text-primary) !important;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Bold text — section names like **Section 154** */
+.stChatMessage strong {
+    color: var(--gold-light) !important;
+    font-weight: 600;
+}
+
+/* Bullet points inside answers */
+.stChatMessage ul li,
+.stChatMessage ol li {
+    color: var(--text-primary);
+    line-height: 1.75;
+    margin-bottom: 4px;
+}
+
+/* ── Chat Input Box ────────────────────────────────────────────── */
+[data-testid="stChatInput"] {
+    background: rgba(15, 18, 25, 0.70) !important;
+    backdrop-filter: var(--blur) !important;
+    -webkit-backdrop-filter: var(--blur) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    transition: all 0.25s ease;
+}
+
+[data-testid="stChatInput"]:focus-within {
+    border-color: var(--glass-border-gold) !important;
+    box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.15),
+                0 4px 24px rgba(0,0,0,0.4) !important;
+    /* gold glow ring on focus */
+}
+
+[data-testid="stChatInput"] textarea {
+    font-family: 'EB Garamond', serif !important;
+    color: var(--text-primary) !important;
+    font-size: 1rem !important;
+    background: transparent !important;
+    caret-color: var(--gold);    /* gold text cursor */
+}
+
+[data-testid="stChatInput"] textarea::placeholder {
+    color: var(--text-secondary) !important;
+    font-style: italic;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────── */
+.stButton > button {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.8px;
+    background: var(--glass-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--radius) !important;
+    backdrop-filter: var(--blur) !important;
+    transition: all 0.25s ease !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.stButton > button:hover {
+    background: rgba(201, 168, 76, 0.15) !important;
+    border-color: var(--glass-border-gold) !important;
+    color: var(--gold-light) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.15) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0px);
+}
+
+/* Secondary button (Clear Chat) */
+.stButton > button[kind="secondary"] {
+    background: rgba(255, 50, 50, 0.06) !important;
+    border-color: rgba(255, 80, 80, 0.2) !important;
+    color: #FF8080 !important;
+}
+
+.stButton > button[kind="secondary"]:hover {
+    background: rgba(255, 50, 50, 0.14) !important;
+    border-color: rgba(255, 80, 80, 0.4) !important;
+    color: #FF6060 !important;
+}
+
+/* ── Text Input (Quick Section Lookup) ─────────────────────────── */
+[data-testid="stTextInput"] input {
+    font-family: 'EB Garamond', serif !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--blur) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--radius) !important;
+    color: var(--text-primary) !important;
+    font-size: 1rem !important;
+    transition: all 0.2s ease;
+    caret-color: var(--gold);
+}
+
+[data-testid="stTextInput"] input:focus {
+    border-color: var(--glass-border-gold) !important;
+    box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.12) !important;
+    outline: none !important;
+}
+
+[data-testid="stTextInput"] input::placeholder {
+    color: var(--text-secondary) !important;
+    font-style: italic;
+}
+
+[data-testid="stTextInput"] label {
+    color: var(--text-secondary) !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.5px;
+}
+
+/* ── Expander (Debug Panel) ───────────────────────────────────── */
+.streamlit-expanderHeader {
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--blur) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--radius) !important;
+    color: var(--text-secondary) !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.streamlit-expanderHeader:hover {
+    background: var(--glass-bg-hover) !important;
+    color: var(--text-primary) !important;
+}
+
+.streamlit-expanderContent {
+    background: rgba(10, 10, 15, 0.5) !important;
+    backdrop-filter: var(--blur) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-top: none !important;
+    border-radius: 0 0 var(--radius) var(--radius) !important;
+}
+
+/* ── Code Blocks (Debug Panel) ────────────────────────────────── */
+.stCode,
+[data-testid="stCode"] {
+    background: rgba(5, 8, 14, 0.75) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 8px !important;
+    font-size: 0.82rem !important;
+}
+
+/* ── Caption Text (Route labels) ──────────────────────────────── */
+.stCaption,
+[data-testid="stCaptionContainer"] p {
+    color: var(--text-secondary) !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 0.88rem !important;
+    font-style: italic;
+    letter-spacing: 0.3px;
+    margin-top: 6px;
+}
+
+/* ── Spinner ──────────────────────────────────────────────────── */
+.stSpinner > div {
+    border-top-color: var(--gold) !important;
+    /* gold spinning indicator */
+}
+
+/* ── Info Box ─────────────────────────────────────────────────── */
+.stInfo {
+    background: rgba(30, 136, 229, 0.08) !important;
+    border-left: 3px solid rgba(30, 136, 229, 0.5) !important;
+    backdrop-filter: var(--blur) !important;
+    border-radius: var(--radius) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ── Markdown text ─────────────────────────────────────────────── */
+.stMarkdown p {
+    font-family: 'EB Garamond', serif;
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.25);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 168, 76, 0.5);
+}
+
+/* ── Chat Message Fade-in Animation ─────────────────────────────── */
+/*
+   Each new message fades in smoothly from slightly below
+   @keyframes defines the animation sequence
+   animation: name duration easing
+*/
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-testid="stChatMessage"] {
+    animation: fadeSlideIn 0.3s ease forwards;
+}
+
+/* ── Glassmorphism Divider Override ──────────────────────────────── */
+[data-testid="stSidebar"] hr {
+    border-top: 1px solid var(--glass-border) !important;
+    opacity: 0.6;
+}
+
+/* ── Avatar icons ────────────────────────────────────────────────── */
+/* 
+   The user and assistant avatars get a gold ring on assistant
+   to visually distinguish LegalMind's responses
+*/
+[data-testid="chatAvatarIcon-assistant"] {
+    border: 1.5px solid var(--gold-dim) !important;
+    box-shadow: 0 0 8px rgba(201, 168, 76, 0.3);
+}
+
+/* ── Font Size Fixes ──────────────────────────────────────────── */
+
+/* Chat message text — bigger and more readable */
+.stChatMessage p {
+    font-size: 1.12rem !important;
+    line-height: 1.85 !important;
+}
+
+/* Bullet points inside answers */
+.stChatMessage ul li,
+.stChatMessage ol li {
+    font-size: 1.08rem !important;
+    line-height: 1.8 !important;
+}
+
+/* Bold section names like **Section 154** */
+.stChatMessage strong {
+    font-size: 1.1rem !important;
+}
+
+/* Main header subtitle */
+.stMarkdown p {
+    font-size: 1.05rem !important;
+}
+
+/* Sidebar text */
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] li {
+    font-size: 1.02rem !important;
+    line-height: 1.7 !important;
+}
+
+/* Caption route labels */
+.stCaption,
+[data-testid="stCaptionContainer"] p {
+    font-size: 0.92rem !important;
+}

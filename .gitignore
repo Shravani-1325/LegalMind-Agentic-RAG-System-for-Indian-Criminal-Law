@@ -2,7 +2,7 @@ myenv/
 .env
 __pycache__/
 *.pyc
-vectorDatabase/
+#vectorDatabase/
 *.faiss
 *.pkl
 .DS_Store
