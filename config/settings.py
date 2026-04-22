@@ -36,7 +36,7 @@ PDF_PATH = BASE_DIR/"data"/"IPC_CrPC_Evidence.pdf"
 #>> Vector Database 
 
 # str() -- FAISS.save_local() uses a string
-VECTOR_DB_PATH = str(BASE_DIR/"vectorDatabse")
+VECTOR_DB_PATH = str(BASE_DIR/"vectorDatabase")
 
 #>> Embedding Model 
 
